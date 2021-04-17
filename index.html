@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!--link href="style/style.css" rel="stylesheet"-->
+    <style>
+        .errorSelect {
+        border-color: red;    
+        }
+    </style>
+</head>
+<body>
+<input type="text" data-name="first" /><label id="1">0</label>
+<input type="text" data-name="second" /><label id="2">0</label>
+<input type="text" data-name="third" /><label id="3">0</label>
+<input type="button" value="Sum" data-submit="totalSum">
+<input type="text" data-name="allSumInput" /><label id="4">0</label>
+ 
+ 
+ 
+<script>
+    const firstInput = document.querySelector('input[data-name="first"]');
+    const secondInput = document.querySelector('input[data-name="second"]');
+    const thirdInput = document.querySelector('input[data-name="third"]');
+    const allSumInput = document.querySelector('input[data-name="allSumInput"]');
+    const submitBtn = document.querySelector('input[data-submit="totalSum"]');
+    
+    var count1 = document.getElementById("1");
+    var count2 = document.getElementById("2");
+    var count3 = document.getElementById("3");
+    var count4 = document.getElementById("4");
+    
+    console.log(firstInput);
+    console.log(secondInput);
+    console.log(thirdInput);
+    console.log(allSumInput);
+    console.log(submitBtn);
+    
+    console.log(count1);
+    
+    console.log(firstInput.style.borderColor);
+ 
+    function digitSum(value) {
+    if ((value !== "") && (isNaN(value) !== true)) {
+    return value.toString().split('').reduce(function(a, b) {
+    return +a + +b;
+     })
+    }
+    }
+    
+    firstInput.onblur = function() {count1.textContent = digitSum(firstInput.value)};
+    secondInput.onblur = function() {count2.textContent = digitSum(secondInput.value)};
+    thirdInput.onblur = function() {count3.textContent = digitSum(thirdInput.value)};
+    allSumInput.onblur = function() {count4.textContent = digitSum(allSumInput.value)};
+    
+    
+    submitBtn.addEventListener('click', function() {
+    
+         
+    if ((firstInput.value === "") || (isNaN(firstInput.value) === true)) {
+       firstInput.classList.add("errorSelect");
+       firstInput.value = "";
+       return false;
+    }
+    if ((secondInput.value === "") || (isNaN(secondInput.value) === true)) {
+       secondInput.classList.add("errorSelect");
+       secondInput.value = "";
+       return false; 
+    }    
+    if ((thirdInput.value === "") || (isNaN(thirdInput.value) === true)) {
+       thirdInput.classList.add("errorSelect");
+       thirdInput.value = "";
+       return false;
+    }    
+    
+    let a = Number(firstInput.value);
+    let b = Number(secondInput.value);
+    let c = Number(thirdInput.value);
+    
+    allSumInput.value = a + b + c;
+    console.log(allSumInput); 
+    
+    firstInput.classList.remove("errorSelect");
+    secondInput.classList.remove("errorSelect");
+    thirdInput.classList.remove("errorSelect");    
+    
+    })
+ 
+ 
+</script>
+ 
+<!--script src="js/custom.js"></script-->
+</body>
+</html>
